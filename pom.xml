@@ -59,8 +59,8 @@
             <artifactId>spring-cloud-aws-starter-sqs</artifactId>
         </dependency>
         <dependency>
-            <groupId>software.amazon.awssdk</groupId>
-            <artifactId>sns</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
         <dependency>
             <groupId>io.awspring.cloud</groupId>

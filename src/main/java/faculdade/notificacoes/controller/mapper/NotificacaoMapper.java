@@ -9,6 +9,7 @@ public class NotificacaoMapper {
         return new Notificacao(
                 mensagem.id(),
                 mensagem.usuarioId(),
+                mensagem.email(),
                 mensagem.dataNotificacao()
         );
     }

@@ -5,6 +5,8 @@ public record Notificacao(
 
          String usuarioId,
 
+         String email,
+
          String dataNotificacao
 ) {
 }

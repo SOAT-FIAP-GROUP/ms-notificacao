@@ -5,6 +5,8 @@ public record MensagemEventoDeFalha(
 
          String usuarioId,
 
+         String email,
+
          String dataNotificacao
 ) {
 }

@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pagamento-app
+  name: notificacao-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pagamento-app
+      app: notificacao-app
   template:
     metadata:
       labels:
-        app: pagamento-app
+        app: notificacao-app
     spec:
       containers:
-        - name: pagamento-container
-          image: joseaugustodossantos/pagamento-app
+        - name: notificacao-container
+          image: joseaugustodossantos/notificacao-app
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -22,17 +22,17 @@ spec:
             - name: SERVICE_PEDIDO
               valueFrom:
                 configMapKeyRef:
-                  name: pagamento-config
+                  name: notificacao-config
                   key: services.pedido.url
             - name: SERVICE_PRODUCAO
               valueFrom:
                 configMapKeyRef:
-                  name: pagamento-config
+                  name: notificacao-config
                   key: services.producao.url
             - name: SPRING_PROFILES_ACTIVE
               valueFrom:
                 configMapKeyRef:
-                  name: pagamento-config
+                  name: notificacao-config
                   key: spring.profiles.active
           resources:
             requests:
