@@ -7,8 +7,9 @@ import faculdade.notificacoes.gateway.entity.NotificacaoEntity;
 public class NotificacaoMapper {
     public static Notificacao messageToModel(MensagemEventoDeFalha mensagem) {
         return new Notificacao(
-                mensagem.id(),
-                mensagem.usuarioId(),
+                mensagem.processamentoId(),
+                mensagem.username(),
+                mensagem.userId(),
                 mensagem.email(),
                 mensagem.dataNotificacao()
         );
@@ -18,6 +19,7 @@ public class NotificacaoMapper {
         return new NotificacaoEntity(
                 notificacao.id(),
                 notificacao.usuarioId(),
+                notificacao.email(),
                 notificacao.dataNotificacao()
         );
     }

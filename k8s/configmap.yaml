@@ -4,5 +4,3 @@ metadata:
   name: notificacao-config
 data:
   spring.profiles.active: ${SPRING_ACTIVE_PROFILE}
-  services.pedido.url: ${SERVICE_PEDIDO}
-  services.producao.url: ${SERVICE_PRODUCAO}
