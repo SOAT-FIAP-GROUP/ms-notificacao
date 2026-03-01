@@ -26,7 +26,7 @@ jobs:
 
       - name: Set Docker image variable
         run: |
-          DOCKER_IMAGE="${{ secrets.DOCKER_USERNAME }}/pagamento-app:latest"
+          DOCKER_IMAGE="${{ secrets.DOCKER_USERNAME }}/notificacao-app:latest"
           echo "DOCKER_IMAGE=$DOCKER_IMAGE" >> $GITHUB_ENV
 
 
@@ -49,14 +49,12 @@ jobs:
       - name: Render ConfigMap
         run: |
           export SPRING_ACTIVE_PROFILE="${{ steps.ssm.outputs.SPRING_ACTIVE_PROFILE }}"
-          export SERVICE_PEDIDO="http://pedido-service.default.svc.cluster.local:8080"
-          export SERVICE_PRODUCAO="http://producao-service.default.svc.cluster.local:8080"
           envsubst < k8s/configmap.yaml > k8s/configmap_rendered.yaml
 
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --name lanchonete-app-dev --region ${{ vars.AWS_REGION }}
+        run: aws eks update-kubeconfig --name hakaton-app-dev --region ${{ vars.AWS_REGION }}
 
       - name: Apply Kubernetes manifests
         run: |
           kubectl apply -f k8s/
-          kubectl rollout status deployment/pagamento-app
+          kubectl rollout status deployment/notificacao-app

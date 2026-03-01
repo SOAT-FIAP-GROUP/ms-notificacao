@@ -16,6 +16,8 @@ public class NotificacaoEntity {
 
     private String usuarioId;
 
+    private String email;
+
     private String dataNotificacao;
 
     @DynamoDbPartitionKey

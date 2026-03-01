@@ -5,8 +5,6 @@ import faculdade.notificacoes.entity.enums.SagaSteps;
 import faculdade.notificacoes.gateway.INotificacaoGateway;
 import faculdade.notificacoes.usecase.INotificacaoUseCase;
 
-import java.util.Objects;
-
 public class NotificacaoUseCase implements INotificacaoUseCase {
     private final INotificacaoGateway notificacaoGateway;
 
@@ -20,7 +18,7 @@ public class NotificacaoUseCase implements INotificacaoUseCase {
         try {
             notificacaoGateway.salvarNotificacao(notificacao);
             step = SagaSteps.NOTIFICACAO_SALVA;
-            notificacaoGateway.enviarMensagemParaSns(notificacao);
+            notificacaoGateway.enviarEmail(notificacao);
         }
         catch (Exception e){
             reverterSagaNotificacao(step, notificacao);
@@ -28,7 +26,7 @@ public class NotificacaoUseCase implements INotificacaoUseCase {
     }
 
     private void reverterSagaNotificacao(SagaSteps step, Notificacao notificacao){
-        if (Objects.requireNonNull(step) == SagaSteps.NOTIFICACAO_SALVA) {
+        if (step == SagaSteps.NOTIFICACAO_SALVA) {
             notificacaoGateway.removerNotificacao(notificacao.id());
         }
     }

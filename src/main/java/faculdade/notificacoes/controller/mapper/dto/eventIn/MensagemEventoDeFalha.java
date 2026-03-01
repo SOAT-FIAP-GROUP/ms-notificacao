@@ -1,9 +1,13 @@
 package faculdade.notificacoes.controller.mapper.dto.eventIn;
 
 public record MensagemEventoDeFalha(
-         String id,
+         String processamentoId,
 
-         String usuarioId,
+         String username,
+
+         String userId,
+
+         String email,
 
          String dataNotificacao
 ) {
