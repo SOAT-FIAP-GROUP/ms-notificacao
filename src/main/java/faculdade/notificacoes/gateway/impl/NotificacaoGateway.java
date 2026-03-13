@@ -29,7 +29,7 @@ public class NotificacaoGateway implements INotificacaoGateway {
     public void enviarEmail(Notificacao notificacao) {
         SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
         msg.setTo(notificacao.email());
-        msg.setText(notificacao.nomeUsuario()  + ",\n Ouve uma falha no processamento do vídeo");
+        msg.setText(notificacao.nomeUsuario()  + ",\nOuve uma falha no processamento do vídeo");
         try {
             this.mailSender.send(msg);
         }

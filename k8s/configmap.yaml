@@ -4,3 +4,5 @@ metadata:
   name: notificacao-config
 data:
   spring.profiles.active: ${SPRING_ACTIVE_PROFILE}
+  notificacao.config.email: ${NOTIFICACAO_EMAIL}
+  notificacao.config.senha: ${NOTIFICACAO_SENHA}

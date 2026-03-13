@@ -44,11 +44,18 @@ jobs:
         id: ssm
         run: |
           SPRING_ACTIVE_PROFILE=$(aws ssm get-parameter --name "SPRING_ACTIVE_PROFILE" --with-decryption --query "Parameter.Value" --output text)
+          NOTIFICACAO_SENHA=$(aws ssm get-parameter --name "NOTIFICACAO_SENHA" --with-decryption --query "Parameter.Value" --output text)
+          NOTIFICACAO_EMAIL=$(aws ssm get-parameter --name "NOTIFICACAO_EMAIL" --with-decryption --query "Parameter.Value" --output text)
           echo "SPRING_ACTIVE_PROFILE=$SPRING_ACTIVE_PROFILE" >> $GITHUB_OUTPUT
+          echo "NOTIFICACAO_SENHA=NOTIFICACAO_SENHA" >> $GITHUB_OUTPUT
+          echo "NOTIFICACAO_EMAIL=NOTIFICACAO_EMAIL" >> $GITHUB_OUTPUT
 
       - name: Render ConfigMap
         run: |
           export SPRING_ACTIVE_PROFILE="${{ steps.ssm.outputs.SPRING_ACTIVE_PROFILE }}"
+          export NOTIFICACAO_SENHA="${{ steps.ssm.outputs.NOTIFICACAO_SENHA }}"
+          export NOTIFICACAO_EMAIL="${{ steps.ssm.outputs.NOTIFICACAO_EMAIL }}"
+
           envsubst < k8s/configmap.yaml > k8s/configmap_rendered.yaml
 
       - name: Update kubeconfig
