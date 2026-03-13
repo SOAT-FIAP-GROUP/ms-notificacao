@@ -24,6 +24,16 @@ spec:
                 configMapKeyRef:
                   name: notificacao-config
                   key: spring.profiles.active
+            - name: NOTIFICACAO_EMAIL
+              valueFrom:
+                configMapKeyRef:
+                  name: notificacao-config
+                  key: notificacao.config.email
+            - name: NOTIFICACAO_SENHA
+              valueFrom:
+                configMapKeyRef:
+                  name: notificacao-config
+                  key: notificacao.config.senha
           resources:
             requests:
               cpu: "100m"
