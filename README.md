@@ -1,4 +1,4 @@
-# Tech Challenge - Fase 4
+# Tech Challenge - Fase 5 | Hackaton
 
 ---
 
@@ -13,73 +13,52 @@
 
 ## 📦 Evidência da cobertura de testes SonarCloud
 
-![pagamento-evidencia-sonar.png](pagamento-evidencia-sonar.png)
+![evidencia-cobertura-notificacao.png](evidencia-cobertura-notificacao.png)
 
 ---
 
-## 📦 Funcionalidades Entregues na Fase 4
+## 📦 Funcionalidades Entregues na Fase 5
 
-- Criação do microsserviço de pagamentos
-- Implementação do banco de dados NoSql DynamoDb para registro dos pagamentos
-- Comunicação com os demais serviços via chamada direta
-- Implementação de um caminho de teste com BDD
-- Cobertura de testes superior a 80% (Segue evidência abaixo)
+- Criação do microsserviço de notificação em caso de falhas
+- Implementação do banco de dados NoSql DynamoDb para registro dos ocorridos
+- Envio de comunicado via email para o usuário
+- Comunicação via mensageria via AWS SQS
+- Cobertura de testes superior a 80% (Segue evidência) 
 - Branches Main/Master protegidas
 - Deploy automatizado via CI/CD
 ---
 
 ## 💡 Solução Proposta
 
-Foi desenvolvido um sistema de autoatendimento para fast food, que:
-
-- Permite que o cliente faça pedidos diretamente via interface, podendo se identificar por CPF, cadastrar-se ou permanecer anônimo.
-
-
-- O cliente pode montar o combo em etapas opcionais: Lanche, Acompanhamento e Bebida, com exibição clara de nome, descrição e preço.
-
-
-- Possui integração com Mercado Pago via QRCode para pagamento.
-
-
-- Exibe para o cliente um monitor de acompanhamento do pedido, com status atualizados em tempo real: Recebido, Em preparação, Pronto e Finalizado.
-
-
-- Notifica o cliente quando o pedido estiver pronto para retirada.
-
-
-- Permite ao estabelecimento gerenciar clientes, produtos e acompanhar os pedidos em andamento.
-
+O microserviço faz parte da arquitetura de solução desenvolvida referente a um sistema 
+de processamento de vídeos onde o usuário realiza seu cadastro na plataforma, realiza o upload de um vídeo e 
+recebe um zip contendo frames do vídeo enviado 
+O sistema em questão foi desenvolvido para a finalidade de notificar o usuário em caso de falha no 
+processamento de um de seus vídeos.
 
 
 ---
-
-##  Arquitetura
-
-![FIAP_ARQUITERURA_PARTE_3.drawio.png](FIAP_ARQUITERURA_PARTE_3.drawio.png)
-Link para consulta: https://drive.google.com/file/d/1lbuXFyJ4u4rDfE4sO1hEmubwgqLQ72TT/view?pli=1
 
 ### Requisitos contemplados
 
 - Escalabilidade e alta disponibilidade com Kubernetes.
 - Segurança e gerenciamento de configuração via Secrets e ConfigMaps.
 - Visibilidade e controle total via painel administrativo.
+- Notificação do usuário
+- Comunicação via mensageria
+- Qualidade de software
+- Persistência dos dados
+- CI/CD
 
 ---
 
 
-## 📚 DDD
-
-Conheça o DDD do nosso projeto no link: https://miro.com/app/board/uXjVI9DOubQ=/
-
----
-
-##  Modelagem de dados
-
-![Entity Relationship Diagram.jpg](Entity%20Relationship%20Diagram.jpg)
-Conheça nosso ADR Banco de Dados no link: https://miro.com/app/board/uXjVJBOnVMI=/?share_link_id=499165686840. Lá você irá encontrar todas as informações sobre a escolha do nosso banco de dados, além de detalhamento dos modelos conceitual, fisico e logico.
+## 🏛️ Arquitetura
 
 
----
+#### [Clique aqui e acesse o link para o Miro do projeto:](https://miro.com/welcomeonboard/QUhYQ29aTjV2ZThVcnh5YjNrWWI3QzB4UzVhTEVUYmZ5SldxdTRIWDRwWW9NZ0Zrbi9sVjBmOXFVM0ZkU0RhSFkyMjltazM4TU8wNStIUy9JMDJQYVZEa2xrNkJZZzN2SU1vang4L2NGcjVhbXViWDZ0S0YxeTBZOVozUU05a2hBS2NFMDFkcUNFSnM0d3FEN050ekl3PT0hdjE=?share_link_id=629025436695)
+
+
 
 ## 🎥 Vídeo Demonstrativo
 
@@ -94,7 +73,7 @@ Assista ao vídeo com demonstração do funcionamento da aplicação e da arquit
 - Spring Boot
 - Kubernetes 
 - DynamoDb
-- Mercado Pago (integração de pagamento via QRCode)
+- SQS
 - Terraform
 - Github Actions
 
@@ -114,10 +93,6 @@ Assista ao vídeo com demonstração do funcionamento da aplicação e da arquit
     ```bash
     mvn spring-boot:run
     ```
-5. Acesse a documentação Swagger:
-    ```
-    http://localhost:8082/swagger-ui/index.html
-    ```
 ## 🚀 Como Executar via Kubernetes
 1. Instalar Kubernetes com Minikube, ou
 2. Instalar Docker Desktop e ativar Kubernetes
@@ -129,23 +104,6 @@ Assista ao vídeo com demonstração do funcionamento da aplicação e da arquit
     ```bash
     kubectl apply -f k8s/
     ```
-    - **Se estiver usando Minikube:**
-    ```bash
-    minikube service pagamento-service
-    ```
-
-   Esse comando deve abrir automaticamente uma aba no navegador com a URL.  
-   Acesse `.../swagger-ui/index.html` no final da URL para ver a documentação dos endpoints.
-
-    - **Se estiver usando Docker Desktop:**
-
-   Acesse diretamente no navegador:
-
-    - http://localhost:30000/
-    - http://localhost:30000/swagger-ui/index.html
-
-   Neles você poderá visualizar a documentação interativa (OpenAPI/Swagger) dos endpoints disponíveis.
-
     - Endpoints para Health Checks:
         - Liveness Probe:
       ```bash
@@ -158,118 +116,23 @@ Assista ao vídeo com demonstração do funcionamento da aplicação e da arquit
 
 ---
 
-## 📚 Endpoints e Exemplos
+## 📚 Exemplo de Request
 
+*OBS.: O serviço implementa apenas comunicação via mensageria*
 
-#### 🔍📚 Collection API (Postman)
-
-Para ter acesso aos Endpoints e exemplos faça o download da collection e importe na sua IDE de preferência:
-[Collection API](https://drive.google.com/uc?export=download&id=1xp52ZV3tcdlxPq5wG7C6tpEA4O6jXKvB)
-
-### 💳 Pagamento
-
-#### 🧾 Gerar QR Code de pagamento
-
-**POST** `/api/pagamento`
-
-**Body:**
-```json
-{
-  "OrderId": 3,
-  "TotalAmount": 10.000000,
-  "Itens": [
-    {
-      "Codigo": 3,
-      "quantidade": 2,
-      "Valor": 5.000000
-    }
-  ]
-}
+### Payload da mensagem a ser enviada:
 
 ```
-
-**Resposta:**
-```json
 {
-  "data": {
-    "in_store_order_id": "a0eae50a-e0a6-4d08-8d5b-b7e4bcf79304",
-    "qr_data": "00020101021243650016COM.MERCADOLIBRE020130636a0eae50a-e0a6-4d08-8d5b-b7e4bcf793045204000053039865802BR5913Andrew Soares6009SAO PAULO62070503***63040655"
-  },
-  "errors": [],
-  "success": true
+	"processamentoId": "2c5e0dcd-3688-40f8-afd4-0dc596f12087",
+  	"username": "Jose Augusto",
+  	"email": "a@b.com",
+  	"userId": "00fce457-2fdc-47c2-b219-0659ecfe56b0"
+  	"dataNotificacao": "2026-02-27T18:56:41"
 }
 ```
-
-#### 🧾 Efetivar Criação do QR Code de Pagamento
-
-**POST** `https://api.mercadopago.com/v1/payments`
-
-**Body:**
-```json
-{
-  "transaction_amount": 10,
-  "payment_method_id": "pix",
-  "description": "Compra de teste QR",
-  "external_reference": "3",
-  "installments": 1,
-  "payer": {
-    "first_name": "Teste",
-    "last_name": "User",
-    "email": "email@gmail.com"
-  }
-}
-
-```
-
-**Resposta:**
-```json
-{
-  "id": 1323573924,
-  "date_created": "2025-06-02T23:49:17.258-04:00"
-} 
-```
-
-#### ✅ Webhook - confirmação de pagamento
-
-**POST** `/webhook/mercadopago/confirmapagamento`
-
-**Body:**
-```json
-{
-  "id": "1323573924",
-  "live_mode": false,
-  "type": "payment",
-  "date_created": "2025-05-22T12:54:53Z",
-  "user_id": 17679366,
-  "api_version": "v1",
-  "action": "payment.created",
-  "data": {
-    "id": "1323573924"
-  }
-}
-```
-
-**Resposta:**
-```json
-{
-  "data": null,
-  "errors": [],
-  "success": true
-}
-```
-
-#### 🧾 Consultar pagamento
-
-**GET** `/api/pagamento?id=1340035121`
-
-**Resposta:**
-```json
-{
-  "pedidoId": "1",
-  "mercadoPagoIdPagamento": 1340035121,
-  "status": "pending"
-}
-```
----
-
-
+processamentoId: UUID gerado pelo serviço de processamento
+username: nome do usuário cadastrado
+email: email do usuário a receber a notificação
+userId: Id do usuário no AWS Cognito gerado automaticamente
+dataNotificacao: timestamp da hora do ocorrido
