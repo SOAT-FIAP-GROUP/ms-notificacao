@@ -47,8 +47,8 @@ jobs:
           NOTIFICACAO_SENHA=$(aws ssm get-parameter --name "NOTIFICACAO_SENHA" --with-decryption --query "Parameter.Value" --output text)
           NOTIFICACAO_EMAIL=$(aws ssm get-parameter --name "NOTIFICACAO_EMAIL" --with-decryption --query "Parameter.Value" --output text)
           echo "SPRING_ACTIVE_PROFILE=$SPRING_ACTIVE_PROFILE" >> $GITHUB_OUTPUT
-          echo "NOTIFICACAO_SENHA=NOTIFICACAO_SENHA" >> $GITHUB_OUTPUT
-          echo "NOTIFICACAO_EMAIL=NOTIFICACAO_EMAIL" >> $GITHUB_OUTPUT
+          echo "NOTIFICACAO_SENHA=$NOTIFICACAO_SENHA" >> $GITHUB_OUTPUT
+          echo "NOTIFICACAO_EMAIL=$NOTIFICACAO_EMAIL" >> $GITHUB_OUTPUT
 
       - name: Render ConfigMap
         run: |
