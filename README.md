@@ -62,7 +62,7 @@ processamento de um de seus vídeos.
 
 ## 🎥 Vídeo Demonstrativo
 
-Assista ao vídeo com demonstração do funcionamento da aplicação e da arquitetura: https://youtu.be/EeZ09IW9S-Y
+Assista ao vídeo com demonstração do funcionamento da aplicação e da arquitetura: https://youtu.be/aFvZ-5U6PtE 
 
 
 ---
